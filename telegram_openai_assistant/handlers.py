@@ -54,6 +54,16 @@ class BotHandlers:
         if update.message is None:
             return  # Exit if the message is None
 
+        user_id = update.effective_user.id
+        
+        # Проверка на наличие пользователя в белом списке
+        if user_id not in [533010596]:
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="⛔ Access denied. You are not authorized to use this bot."
+            )
+            return
+
         message_text = update.message.text
 
         message_data = get_message_count()
